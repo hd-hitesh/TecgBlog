@@ -17,7 +17,9 @@ public class UserDao {
         try {
             //user -->database
 
-            String query = "insert into user(name,email,password,gender,about) values ('"+user.getName()+"','"+user.getEmail()+"','"+user.getPassword()+"','"+user.getGender()+"','"+user.getAbout()+"')";
+            String query = "insert into user(name,email,password,gender,about) "
+                    + "values ('" + user.getName() + "','" + user.getEmail() + "','" + user.getPassword() + "','" + user.getGender() + "','" + user.getAbout() + "')";
+
 //            String query = "insert into user values(?,?,?,?,?)";
 //            PreparedStatement pstmt = this.con.prepareStatement(query);
 //            pstmt.setString(1, user.getName());
