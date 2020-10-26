@@ -49,23 +49,23 @@ public class UserDao {
             pstmt.setString(1, email);
             pstmt.setString(2, password);
 
-            ResultSet set = pstmt.executeQuery();
+            ResultSet rs = pstmt.executeQuery();
 
-            if (set.next()) {
+            if (rs.next()) {
                 user = new User();
 
 //             data from db
-                String name = set.getString("name");
+                String name = rs.getString("name");
 //             set to user object
                 user.setName(name);
 
-                user.setId(set.getInt("id"));
-                user.setEmail(set.getString("email"));
-                user.setPassword(set.getString("password"));
-                user.setGender(set.getString("gender"));
-                user.setAbout(set.getString("about"));
-                user.setDateTime(set.getTimestamp("rdate"));
-                user.setProfile(set.getString("profile"));
+                user.setId(rs.getInt("id"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setGender(rs.getString("gender"));
+                user.setAbout(rs.getString("about"));
+                user.setDateTime(rs.getTimestamp("rdate"));
+                user.setProfile(rs.getString("profile"));
 
             }
 
