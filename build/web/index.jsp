@@ -37,7 +37,7 @@
                     <h3 class="display-3">Welcome to TechBlog</h3>
                     <p>A programming language is a formal language comprising a set of instructions that produce various kinds of output. Programming languages are used in computer programming to implement algorithms.</p>
                     <p>A computer programming language is a language used to write computer programs, which involves a computer performing some kind of computation[5] or algorithm and possibly control external devices such as printers, disk drives, robots,[6] and so on. More generally, a programming language may describe computation on some, possibly abstract, machine.. Programming languages differ from natural languages in that natural languages are only used for interaction between people, while programming languages also allow humans to communicate instructions to machines.</p>
-                    <button class="btn btn-outline-light btn-lg"><span class="fa fa-user-plus"></span> Start! its Free</button>
+                    <a href="register_page.jsp" class="btn btn-outline-light btn-lg"><span class="fa fa-user-plus"></span> Start! its Free</a>
                     <a href="login_page.jsp" class="btn btn-outline-light btn-lg"><span class="fa fa-user-circle-o"></span> Login</a>
                 </div>
             </div>
