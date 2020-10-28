@@ -83,7 +83,7 @@ public class EditServlet extends HttpServlet {
                     s.setAttribute("msg", msg);
 
                 } else {
-                    //////////////
+                    ///////////////////////
                     Message msg = new Message("Something went wrong..", "error", "alert-danger");
                     s.setAttribute("msg", msg);
                 }
