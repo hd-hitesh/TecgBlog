@@ -29,6 +29,11 @@
             .banner-background{
                 clip-path: polygon(100% 0, 100% 100%, 76% 92%, 52% 100%, 28% 91%, 0 100%, 0 0);
             }
+/*            body{
+                background:url(img/bg.jpeg);
+                background-size: cover;
+                background-attachment: fixed;
+            }*/
         </style>
 
     </head>
@@ -45,7 +50,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#"> <span class="	fa fa-bell-o"></span> LearnCode with Durgesh <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="#"> <span class="	fa fa-bell-o"></span> Let's Code it <span class="sr-only">(current)</span></a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -103,9 +108,58 @@
         %>
 
 
+        <!--main body of the page-->
+
+        <main>
+            <div class="container">
+                <div class="row mt-4">
+                    <!--first col-->
+                    <div class="col-md-4">
+                        <!--categories-->
+                        <div class="list-group">
+                            <a href="#" onclick="getPosts(0, this)"  class=" c-link list-group-item list-group-item-action active">
+                                All Posts
+                            </a>
+                            <!--categories-->
+
+                            <%                                PostDao d = new PostDao(ConnectionProvider.getConnection());
+                                ArrayList<Category> list1 = d.getAllCategories();
+                                for (Category cc : list1) {
+
+                            %>
+                            <a href="#" onclick="getPosts(<%= cc.getCid()%>, this)" class=" c-link list-group-item list-group-item-action"><%= cc.getName()%></a>
+
+                            <%         }
+                            %>
+                        </div>
+
+                    </div>
+
+
+                    <!--second col-->
+                    <div class="col-md-8" >
+                        <!--posts-->
+                        <div class="container text-center" id="loader">
+                            <i class="fa fa-refresh fa-4x fa-spin"></i>
+                            <h3 class="mt-2">Loading...</h3>
+                        </div>
+
+                        <div class="container-fluid" id="post-container">
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+
+        <!--end main body of the page-->
+
+
         <!--profile modal-->
-
-
 
         <!-- Modal -->
         <div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -297,32 +351,34 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
         <script src="js/myjs.js" type="text/javascript"></script>
 
+
+        <!--button toogle-->
         <script>
-            $(document).ready(function () {
-                let editStatus = false;
+                                $(document).ready(function () {
+                                    let editStatus = false;
 
-                $('#edit-profile-button').click(function ()
-                {
+                                    $('#edit-profile-button').click(function ()
+                                    {
 
-                    if (editStatus == false)
-                    {
-                        $("#profile-details").hide()
+                                        if (editStatus == false)
+                                        {
+                                            $("#profile-details").hide()
 
-                        $("#profile-edit").show();
-                        editStatus = true;
-                        $(this).text("Back")
-                    } else
-                    {
-                        $("#profile-details").show()
+                                            $("#profile-edit").show();
+                                            editStatus = true;
+                                            $(this).text("Back")
+                                        } else
+                                        {
+                                            $("#profile-details").show()
 
-                        $("#profile-edit").hide();
-                        editStatus = false;
-                        $(this).text("Edit")
+                                            $("#profile-edit").hide();
+                                            editStatus = false;
+                                            $(this).text("Edit")
 
-                    }
+                                        }
 
-                })
-            });
+                                    })
+                                });
 
         </script>
 
@@ -362,6 +418,40 @@
                         contentType: false
                     })
                 })
+            })
+        </script>
+
+        <!--loading post using ajax-->
+        <script>
+
+            function getPosts(catId, temp) {
+                $("#loader").show();
+                $("#post-container").hide()
+
+                $(".c-link").removeClass('active')
+
+
+                $.ajax({
+                    url: "load_posts.jsp",
+                    data: {cid: catId},
+                    success: function (data, textStatus, jqXHR) {
+                        console.log(data);
+                        $("#loader").hide();
+                        $("#post-container").show();
+                        $('#post-container').html(data)
+                        $(temp).addClass('active')
+
+                    }
+                })
+
+            }
+
+            $(document).ready(function (e) {
+
+                let allPostRef = $('.c-link')[0]
+                getPosts(0, allPostRef)
+
+
             })
         </script>
 
