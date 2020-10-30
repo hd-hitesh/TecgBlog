@@ -1,6 +1,5 @@
-<%@page import="com.tech.blog.dao.LikeDao"%>
 <%@page import="com.tech.blog.entities.User"%>
-<%--<%@page import="com.tech.blog.dao.LikeDao"%>--%>
+<%@page import="com.tech.blog.dao.LikeDao"%>
 <%@page import="com.tech.blog.entities.Post"%>
 <%@page import="java.util.List"%>
 <%@page import="com.tech.blog.helper.ConnectionProvider"%>
@@ -9,12 +8,12 @@
 <div class="row">
 
     <%
-        
-        User uuu=(User)session.getAttribute("currentUser");
-        
-//        Thread.sleep(1000);
+
+        User uuu = (User) session.getAttribute("currentUser");
+
+        Thread.sleep(1000);
         PostDao d = new PostDao(ConnectionProvider.getConnection());
-        
+
         int cid = Integer.parseInt(request.getParameter("cid"));
         List<Post> posts = null;
         if (cid == 0) {
@@ -22,12 +21,12 @@
         } else {
             posts = d.getPostByCatId(cid);
         }
-        
+
         if (posts.size() == 0) {
             out.println("<h3 class='display-3 text-center'>No Posts in this category..</h3>");
             return;
         }
-        
+
         for (Post p : posts) {
     %>
 
@@ -40,7 +39,7 @@
 
             </div>
             <div class="card-footer primary-background text-center">
-                <% 
+                <%
                     LikeDao ld = new LikeDao(ConnectionProvider.getConnection());
                 %>
 
@@ -58,7 +57,7 @@
 
     <%
         }
-        
+
 
     %>
 
